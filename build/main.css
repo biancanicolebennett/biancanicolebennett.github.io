@@ -1,1 +1,102 @@
-body,html{min-height:100%;padding:0;margin:0;font-family:Open Sans,sans-serif;background:#ffbab0;color:#fff}.page{position:absolute;left:32px;right:32px;top:0;height:100%;-webkit-transition:top .3s ease;transition:top .3s ease}.content{width:1200px;min-width:400px;max-width:100%;margin:0 auto;position:relative}.inner-block{position:absolute;top:140px;right:0;width:800px;max-width:100%}#nav{position:fixed;top:0;left:32px;right:32px;height:80px;line-height:80px;z-index:1;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;cursor:default}.link{letter-spacing:.15em;font-size:11px;text-transform:uppercase;padding:8px;cursor:pointer;float:right}.link:hover{color:gray}.name{font-size:13px;letter-spacing:.075em;font-weight:700;text-transform:uppercase;float:left;cursor:pointer}.name:hover{color:gray}.headline{font-weight:700;font-size:64px}.list-wrap{margin-top:40px;border-top:1px solid #fff;white-space:pre}.list{float:left;width:30%}.list-title{text-transform:uppercase;font-weight:500;line-height:40px;margin:0;height:40px}
+html, body {
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background: #ffbab0;
+    color: white;
+}
+
+.page {
+    position: absolute;
+    left: 32px;
+    right: 32px;
+    top: 0;
+    height: 100%;
+    -webkit-transition: top 300ms ease;
+    transition: top 300ms ease;
+}
+
+.content {
+    width: 1200px;
+    min-width: 400px;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+.inner-block {
+    position: absolute;
+    top: 140px;
+    right: 0;
+    width: 800px;
+    max-width: 100%;
+}#nav {
+    position: fixed;
+    top: 0;
+    left: 32px;
+    right: 32px;
+    height: 80px;
+    line-height: 80px;
+    z-index: 1;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    cursor: default;
+}
+
+.link {
+    letter-spacing: 0.15em;
+    font-size: 11px;
+    text-transform: uppercase;
+    padding: 8px;
+    cursor: pointer;
+    float: right
+}
+
+.link:hover {
+    color: gray;
+}
+
+.name {
+    font-size: 13px;
+    letter-spacing: 0.075em;
+    font-weight: 700;
+    text-transform: uppercase;
+    float: left;
+    cursor: pointer
+}
+
+.name:hover {
+    color: gray;
+}
+.headline {
+    font-weight: 700;
+    font-size: 64px;
+}
+.bio {
+
+}
+
+.list-wrap {
+    margin-top: 40px;
+    border-top: 1px solid white;
+    white-space: pre;
+}
+
+.list {
+    float: left;
+    width: 30%;
+}
+
+.list-title {
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 40px;
+    margin: 0;
+    height: 40px;
+}
+.contact-info {
+
+}

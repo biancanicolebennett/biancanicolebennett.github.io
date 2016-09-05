@@ -1,7 +1,6 @@
 :root {
     --background: #ffbab0;
 
-    /* typography */
     --body-font: 'Open Sans', sans-serif;
     --text-color: white;
     --text-color-hover: gray;
@@ -18,7 +17,6 @@
     --headline-font-weight: 700;
     --headline-font-size: 64px;
 
-    /* measurements */
     --content-width: 1200px;
     --content-width-min: 400px;
     --content-padding-top: 140px;
@@ -30,5 +28,4 @@
 
     --page-margins: 32px;
     --page-transition: top 300ms ease;
-
 }

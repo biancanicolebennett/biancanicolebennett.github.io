@@ -1,1 +1,370 @@
-!function(e){function t(i){if(n[i])return n[i].exports;var o=n[i]={exports:{},id:i,loaded:!1};return e[i].call(o.exports,o,o.exports,t),o.loaded=!0,o.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}(function(e){for(var t in e)if(Object.prototype.hasOwnProperty.call(e,t))switch(typeof e[t]){case"function":break;case"object":e[t]=function(t){var n=t.slice(1),i=e[t[0]];return function(e,t,o){i.apply(this,[e,t,o].concat(n))}}(e[t]);break;default:e[t]=e[e[t]]}return e}([function(e,t,n){"use strict";n(11);var i=n(3),o=n(12),a=n(6),s=n(4),c=n(5);void function(){i.queueTask(o.initNav),i.queueTask(a.initHome),i.queueTask(s.initAbout),i.queueTask(c.initContact)}()},function(e,t){"use strict";t.headline="Bianca is a research-focused UX Designer in New York City.",t.bio="Bianca's from Hawaii. She does UX stuff.",t.skills=["wireframing","prototyping","Design Studio"],t.email="biancanicolebennett@gmail.com",t.links=["contact","about"]},function(e,t){"use strict";function n(){var e,t,n;e=document.createElement("div"),e.className="page",e.style.top="-100%",e.setAttribute("aria-hidden","true"),t=document.createElement("div"),t.className="content",n=document.createElement("div"),n.className="inner-block",t.appendChild(n),e.appendChild(t),this.el=e,this.contentEl=n}t.__esModule=!0,t["default"]=n,n.prototype.show=function(){this.el.setAttribute("aria-hidden","false"),this.el.style.top="0"},n.prototype.hide=function(){this.el.style.top="-100%",this.el.setAttribute("aria-hidden","true")},n.prototype.setContent=function(e){this.contentEl.textContent=e},n.prototype.setClassName=function(e){this.contentEl.classList.add(e)}},function(e,t){"use strict";function n(){for(var e=u,t=c[e];++e<r;)c[e]==t&&(c[e]=null);t=c[e]=null}function i(e){do null!==c[u]&&(c[u](),n()),a=s();while(++u<r&&3>a-e);u>=r?(u=r=0,d=!0):requestAnimationFrame(i)}function o(e){c[r++]=e,d&&(d=!1,requestAnimationFrame(i))}var a,s=window.performance&&window.performance.now?window.performance.now.bind(window.performance):Date.now,c=[],u=0,r=0,d=!0;t.queueTask=o},function(e,t,n){"use strict";function i(e,t){var n,i,o;return n=document.createElement("div"),n.className="list",i=document.createElement("h6"),i.className="list-title",i.textContent=e,o=document.createElement("div"),o.textContent=t.join("\n"),n.appendChild(i),n.appendChild(o),n}function o(){var e=document.createElement("div"),t=i("skills",r.skills),n=i("",["idk","etc"]),o=i("another col",["things"]);e.className="list-wrap",e.appendChild(t),e.appendChild(n),e.appendChild(o),u.contentEl.appendChild(e)}function a(){u=new l["default"],u.setContent(r.bio),u.hide(),document.body.appendChild(u.el),d.queueTask(o)}function s(){u.show()}function c(){u.hide()}n(7);var u,r=n(1),d=n(3),l=n(2);t.initAbout=a,t.showAbout=s,t.hideAbout=c},function(e,t,n){"use strict";function i(){s=new c["default"],s.hide(),s.setContent(u.email),s.setClassName("contact-info"),document.body.appendChild(s.el)}function o(){s.show()}function a(){s.hide()}n(8);var s,c=n(2),u=n(1);t.initContact=i,t.showContact=o,t.hideContact=a},function(e,t,n){"use strict";function i(){s=new u["default"],s.setClassName("headline"),s.setContent(c.headline),s.show(),document.body.appendChild(s.el)}function o(){s.show()}function a(){s.hide()}n(9);var s,c=n(1),u=n(2);t.initHome=i,t.showHome=o,t.hideHome=a},function(e,t){},7,7,7,7,function(e,t,n){"use strict";function i(e){var t=e.target.getAttribute(f);t&&t!=s&&o(t),history.pushState({page:s},s,s)}function o(e){switch(e){case"home":r.queueTask(c),r.queueTask(d.showHome),c=d.hideHome;break;case"about":r.queueTask(c),r.queueTask(l.showAbout),c=l.hideAbout;break;case"contact":r.queueTask(c),r.queueTask(h.showContact),c=h.hideContact;break;default:return}s=e}function a(){s="home",c=d.hideHome,window.addEventListener("popstate",function(e){e.state.page&&o(e.state.page)});var e=document.getElementById("links");e.addEventListener("click",i,!1);for(var t=0;t<u.links.length;++t){var n=document.createElement("div");n.className="link",n.textContent=u.links[t],n.setAttribute(f,u.links[t]),e.appendChild(n)}}n(10);var s,c,u=n(1),r=n(3),d=n(6),l=n(4),h=n(5),f="data-link";t.initNav=a}]));
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ((function(modules) {
+	// Check all modules for deduplicated modules
+	for(var i in modules) {
+		if(Object.prototype.hasOwnProperty.call(modules, i)) {
+			switch(typeof modules[i]) {
+			case "function": break;
+			case "object":
+				// Module can be created from a template
+				modules[i] = (function(_m) {
+					var args = _m.slice(1), fn = modules[_m[0]];
+					return function (a,b,c) {
+						fn.apply(this, [a,b,c].concat(args));
+					};
+				}(modules[i]));
+				break;
+			default:
+				// Module is a copy of another module
+				modules[i] = modules[modules[i]];
+				break;
+			}
+		}
+	}
+	return modules;
+}([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	__webpack_require__(11);
+	var taskqueue_1 = __webpack_require__(3);
+	var nav_1 = __webpack_require__(12);
+	var home_1 = __webpack_require__(6);
+	var about_1 = __webpack_require__(4);
+	var contact_1 = __webpack_require__(5);
+	void function init() {
+	    taskqueue_1.queueTask(nav_1.initNav);
+	    taskqueue_1.queueTask(home_1.initHome);
+	    taskqueue_1.queueTask(about_1.initAbout);
+	    taskqueue_1.queueTask(contact_1.initContact);
+	}();
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
+
+	"use strict";
+	exports.headline = "Bianca is a research-focused UX Designer in New York City.";
+	exports.bio = "Bianca's from Hawaii. She does UX stuff.";
+	exports.email = "biancanicolebennett@gmail.com";
+	exports.skills = [
+	    "wireframing",
+	    "prototyping",
+	    "Design Studio"
+	];
+	exports.links = [
+	    "contact",
+	    "about"
+	];
+
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	"use strict";
+	function Page() {
+	    var el, wrap, contentEl;
+	    el = document.createElement("div");
+	    el.className = "page";
+	    el.style.top = "-100%"; // starts offscreen
+	    el.setAttribute("aria-hidden", "true");
+	    wrap = document.createElement("div");
+	    wrap.className = "content";
+	    contentEl = document.createElement("div");
+	    contentEl.className = "inner-block";
+	    wrap.appendChild(contentEl);
+	    el.appendChild(wrap);
+	    this.el = el;
+	    this.contentEl = contentEl;
+	}
+	exports.__esModule = true;
+	exports["default"] = Page;
+	Page.prototype.show = function () {
+	    this.el.setAttribute("aria-hidden", "false");
+	    this.el.style.top = "0";
+	};
+	Page.prototype.hide = function () {
+	    this.el.style.top = "-100%";
+	    this.el.setAttribute("aria-hidden", "true");
+	};
+	Page.prototype.setContent = function (text) {
+	    this.contentEl.textContent = text;
+	};
+	Page.prototype.setClassName = function (className) {
+	    this.contentEl.classList.add(className);
+	};
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var now = window.performance && window.performance.now ?
+	    window.performance.now.bind(window.performance) : Date.now;
+	var tasks = [];
+	var index = 0;
+	var total = 0;
+	var ready = true;
+	var end;
+	function dedupe() {
+	    var i = index, task = tasks[i];
+	    while (++i < total) {
+	        if (tasks[i] == task)
+	            tasks[i] = null;
+	    }
+	    task = tasks[i] = null;
+	}
+	function runTasks(start) {
+	    do {
+	        if (tasks[index] !== null) {
+	            tasks[index]();
+	            dedupe();
+	        }
+	        end = now();
+	    } while ((++index < total) && end - start < 3);
+	    if (index >= total) {
+	        index = total = 0;
+	        ready = true;
+	    }
+	    else {
+	        requestAnimationFrame(runTasks);
+	    }
+	}
+	function queueTask(task) {
+	    tasks[total++] = task;
+	    if (ready) {
+	        ready = false;
+	        requestAnimationFrame(runTasks);
+	    }
+	}
+	exports.queueTask = queueTask;
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	__webpack_require__(7);
+	var config_1 = __webpack_require__(1);
+	var taskqueue_1 = __webpack_require__(3);
+	var Page_1 = __webpack_require__(2);
+	var aboutPage;
+	function createList(title, items) {
+	    var listEl, titleEl, itemsEl;
+	    listEl = document.createElement("div");
+	    listEl.className = "list";
+	    titleEl = document.createElement("h6");
+	    titleEl.className = "list-title";
+	    titleEl.textContent = title;
+	    itemsEl = document.createElement("div");
+	    itemsEl.textContent = items.join("\n");
+	    listEl.appendChild(titleEl);
+	    listEl.appendChild(itemsEl);
+	    return listEl;
+	}
+	function initLists() {
+	    var listWrap = document.createElement("div");
+	    var colA = createList("skills", config_1.skills);
+	    var colB = createList("", ["idk", "etc"]);
+	    var colC = createList("another col", ["things"]);
+	    listWrap.className = "list-wrap";
+	    listWrap.appendChild(colA);
+	    listWrap.appendChild(colB);
+	    listWrap.appendChild(colC);
+	    aboutPage.contentEl.appendChild(listWrap);
+	}
+	function initAbout() {
+	    aboutPage = new Page_1["default"]();
+	    aboutPage.setContent(config_1.bio);
+	    aboutPage.hide();
+	    document.body.appendChild(aboutPage.el);
+	    taskqueue_1.queueTask(initLists);
+	}
+	exports.initAbout = initAbout;
+	function showAbout() {
+	    aboutPage.show();
+	}
+	exports.showAbout = showAbout;
+	function hideAbout() {
+	    aboutPage.hide();
+	}
+	exports.hideAbout = hideAbout;
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	__webpack_require__(8);
+	var Page_1 = __webpack_require__(2);
+	var config_1 = __webpack_require__(1);
+	var contactPage;
+	function initContact() {
+	    contactPage = new Page_1["default"]();
+	    contactPage.hide();
+	    contactPage.setContent(config_1.email);
+	    contactPage.setClassName("contact-info");
+	    document.body.appendChild(contactPage.el);
+	}
+	exports.initContact = initContact;
+	function showContact() {
+	    contactPage.show();
+	}
+	exports.showContact = showContact;
+	function hideContact() {
+	    contactPage.hide();
+	}
+	exports.hideContact = hideContact;
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	__webpack_require__(9);
+	var config_1 = __webpack_require__(1);
+	var Page_1 = __webpack_require__(2);
+	var homePage;
+	function initHome() {
+	    homePage = new Page_1["default"]();
+	    homePage.setClassName("headline");
+	    homePage.setContent(config_1.headline);
+	    homePage.show();
+	    document.body.appendChild(homePage.el);
+	}
+	exports.initHome = initHome;
+	function showHome() {
+	    homePage.show();
+	}
+	exports.showHome = showHome;
+	function hideHome() {
+	    homePage.hide();
+	}
+	exports.hideHome = hideHome;
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 8 */
+7,
+/* 9 */
+7,
+/* 10 */
+7,
+/* 11 */
+7,
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	__webpack_require__(10);
+	var config_1 = __webpack_require__(1);
+	var taskqueue_1 = __webpack_require__(3);
+	var home_1 = __webpack_require__(6);
+	var about_1 = __webpack_require__(4);
+	var contact_1 = __webpack_require__(5);
+	var linkAttr = "data-link";
+	var currentPage;
+	var onBlur;
+	function clickLink(event) {
+	    var navTo = event.target.getAttribute(linkAttr);
+	    if (navTo && navTo != currentPage)
+	        handleNavigate(navTo);
+	    history.pushState({ page: currentPage }, currentPage, currentPage);
+	}
+	function handleNavigate(dest) {
+	    switch (dest) {
+	        case "home":
+	            taskqueue_1.queueTask(onBlur);
+	            taskqueue_1.queueTask(home_1.showHome);
+	            onBlur = home_1.hideHome;
+	            break;
+	        case "about":
+	            taskqueue_1.queueTask(onBlur);
+	            taskqueue_1.queueTask(about_1.showAbout);
+	            onBlur = about_1.hideAbout;
+	            break;
+	        case "contact":
+	            taskqueue_1.queueTask(onBlur);
+	            taskqueue_1.queueTask(contact_1.showContact);
+	            onBlur = contact_1.hideContact;
+	            break;
+	        default: return;
+	    }
+	    currentPage = dest;
+	}
+	function initNav() {
+	    currentPage = "home";
+	    onBlur = home_1.hideHome;
+	    window.addEventListener("popstate", function (event) {
+	        if (event.state.page)
+	            handleNavigate(event.state.page);
+	    });
+	    var linksEl = document.getElementById("links");
+	    linksEl.addEventListener("click", clickLink, false);
+	    for (var i = 0; i < config_1.links.length; ++i) {
+	        var el = document.createElement("div");
+	        el.className = "link";
+	        el.textContent = config_1.links[i];
+	        el.setAttribute(linkAttr, config_1.links[i]);
+	        linksEl.appendChild(el);
+	    }
+	}
+	exports.initNav = initNav;
+
+
+/***/ }
+/******/ ])));

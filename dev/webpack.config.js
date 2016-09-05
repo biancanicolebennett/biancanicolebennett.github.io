@@ -36,8 +36,7 @@ module.exports = {
         extractCSS,
         new webpack.NoErrorsPlugin(),
         new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin()
+        new webpack.optimize.OccurrenceOrderPlugin()
     ],
     node: {
         fs: "empty"
@@ -45,8 +44,7 @@ module.exports = {
     postcss: function () {
         return [
             require('postcss-import')(),
-            require('postcss-cssnext')(),
-            require('cssnano')()
+            require('postcss-cssnext')()
         ];
     }
 };
