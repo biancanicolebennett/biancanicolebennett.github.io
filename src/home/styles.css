@@ -1,0 +1,6 @@
+@import "../vars.css";
+
+.headline {
+    font-weight: var(--headline-font-weight);
+    font-size: var(--headline-font-size);
+}

@@ -1,0 +1,39 @@
+@import "../vars.css";
+
+#nav {
+    position: fixed;
+    top: 0;
+    left: var(--page-margins);
+    right: var(--page-margins);
+    height: var(--nav-height);
+    line-height: var(--nav-height);
+    z-index: 1;
+    user-select: none;
+    cursor: default;
+}
+
+.link {
+    letter-spacing: var(--link-letter-spacing);
+    font-size: var(--link-font-size);
+    text-transform: var(--link-text-transform);
+    padding: var(--link-padding);
+    cursor: pointer;
+    float: right;
+
+    &:hover {
+        color: var(--text-color-hover);
+    }
+}
+
+.name {
+    font-size: var(--home-link-font-size);
+    letter-spacing: var(--home-link-letter-spacing);
+    font-weight: var(--home-link-font-weight);
+    text-transform: var(--link-text-transform);
+    float: left;
+    cursor: pointer;
+
+    &:hover {
+        color: var(--text-color-hover);
+    }
+}

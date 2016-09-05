@@ -1,0 +1,31 @@
+{
+  "name": "biancabennet",
+  "version": "1.0.0",
+  "description": "Personal site for Bianca Bennett",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "npm link webpack && npm install",
+    "build": "webpack --config dev/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/biancanicolebennett/biancanicolebennett.github.io.git"
+  },
+  "author": "Eric Birkeland",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/biancanicolebennett/biancanicolebennett.github.io/issues"
+  },
+  "homepage": "https://biancanicolebennett.github.io",
+  "devDependencies": {
+    "css-loader": "^0.25.0",
+    "cssnano": "^3.7.4",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "postcss-cssnext": "^2.8.0",
+    "postcss-import": "^8.1.2",
+    "postcss-loader": "^0.11.1",
+    "style-loader": "^0.13.1",
+    "ts-loader": "^0.8.2",
+    "typescript": "^1.8.10"
+  }
+}
