@@ -75,10 +75,6 @@ html, body {
     font-weight: 700;
     font-size: 64px;
 }
-.bio {
-
-}
-
 .list-wrap {
     margin-top: 40px;
     border-top: 1px solid white;
@@ -87,7 +83,7 @@ html, body {
 
 .list {
     float: left;
-    width: 30%;
+    min-width: 240px;
 }
 
 .list-title {

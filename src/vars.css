@@ -19,10 +19,11 @@
 
     --content-width: 1200px;
     --content-width-min: 400px;
-    --content-padding-top: 140px;
 
     --inner-block-top: 140px;
     --inner-block-width: 800px;
+
+    --about-list-width: 240px;
 
     --nav-height: 80px;
 

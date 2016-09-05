@@ -1,36 +1,39 @@
 import "./styles.css";
-import { bio, skills } from "../config";
+import { bio, aboutPageLists } from "../config";
 import { queueTask } from "../taskqueue";
 import Page from "../Page";
 
 var aboutPage;
 
 function createList(title: string, items: string[]) {
-    let listEl, titleEl, itemsEl;
+    let listEl, titleEl, listItems, itemGroup;
+
     listEl = document.createElement("div");
     listEl.className = "list";
-
     titleEl = document.createElement("h6");
     titleEl.className = "list-title";
     titleEl.textContent = title;
+    listItems = document.createElement("div");
 
-    itemsEl = document.createElement("div");
-    itemsEl.textContent = items.join("\n");
+    for (let i = 0; i < items.length; i += 4) {
+        itemGroup = document.createElement("div");
+        itemGroup.className = "list";
+        itemGroup.textContent = items.slice(i, i + 4).join("\n");
+        listItems.appendChild(itemGroup);
+    }
 
     listEl.appendChild(titleEl);
-    listEl.appendChild(itemsEl);
+    listEl.appendChild(listItems);
     return listEl;
 }
 
 function initLists() {
     let listWrap = document.createElement("div");
-    let colA = createList("skills", skills);
-    let colB = createList("", ["idk", "etc"]);
-    let colC = createList("another col", ["things"]);
+    let listTitles = Object.keys(aboutPageLists);
     listWrap.className = "list-wrap";
-    listWrap.appendChild(colA);
-    listWrap.appendChild(colB);
-    listWrap.appendChild(colC);
+    for (let i = 0, j = listTitles.length; i < j; ++i) {
+        listWrap.appendChild(createList(listTitles[i], aboutPageLists[listTitles[i]]));
+    }
     aboutPage.contentEl.appendChild(listWrap);
 }
 

@@ -1,9 +1,5 @@
 @import "../vars.css";
 
-.bio {
-
-}
-
 .list-wrap {
     margin-top: 40px;
     border-top: 1px solid white;
@@ -12,7 +8,7 @@
 
 .list {
     float: left;
-    width: 30%;
+    min-width: var(--about-list-width);
 }
 
 .list-title {

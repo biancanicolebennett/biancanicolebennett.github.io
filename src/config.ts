@@ -4,11 +4,19 @@ export const bio = "Bianca's from Hawaii. She does UX stuff.";
 
 export const email = "biancanicolebennett@gmail.com";
 
-export const skills = [
-    "wireframing",
-    "prototyping",
-    "Design Studio"
-];
+export const aboutPageLists = {
+    "skills": [
+        "wireframing",
+        "prototyping",
+        "Design Studio",
+        "persona profiling",
+        "client interviews",
+        "heatmapping"
+    ],
+    "experience": [
+        "ya"
+    ]
+};
 
 export const links = [
     "contact",

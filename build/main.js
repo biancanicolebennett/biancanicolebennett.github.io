@@ -90,11 +90,19 @@
 	exports.headline = "Bianca is a research-focused UX Designer in New York City.";
 	exports.bio = "Bianca's from Hawaii. She does UX stuff.";
 	exports.email = "biancanicolebennett@gmail.com";
-	exports.skills = [
-	    "wireframing",
-	    "prototyping",
-	    "Design Studio"
-	];
+	exports.aboutPageLists = {
+	    "skills": [
+	        "wireframing",
+	        "prototyping",
+	        "Design Studio",
+	        "persona profiling",
+	        "client interviews",
+	        "heatmapping"
+	    ],
+	    "experience": [
+	        "ya"
+	    ]
+	};
 	exports.links = [
 	    "contact",
 	    "about"
@@ -196,27 +204,30 @@
 	var Page_1 = __webpack_require__(2);
 	var aboutPage;
 	function createList(title, items) {
-	    var listEl, titleEl, itemsEl;
+	    var listEl, titleEl, listItems, itemGroup;
 	    listEl = document.createElement("div");
 	    listEl.className = "list";
 	    titleEl = document.createElement("h6");
 	    titleEl.className = "list-title";
 	    titleEl.textContent = title;
-	    itemsEl = document.createElement("div");
-	    itemsEl.textContent = items.join("\n");
+	    listItems = document.createElement("div");
+	    for (var i = 0; i < items.length; i += 4) {
+	        itemGroup = document.createElement("div");
+	        itemGroup.className = "list";
+	        itemGroup.textContent = items.slice(i, i + 4).join("\n");
+	        listItems.appendChild(itemGroup);
+	    }
 	    listEl.appendChild(titleEl);
-	    listEl.appendChild(itemsEl);
+	    listEl.appendChild(listItems);
 	    return listEl;
 	}
 	function initLists() {
 	    var listWrap = document.createElement("div");
-	    var colA = createList("skills", config_1.skills);
-	    var colB = createList("", ["idk", "etc"]);
-	    var colC = createList("another col", ["things"]);
+	    var listTitles = Object.keys(config_1.aboutPageLists);
 	    listWrap.className = "list-wrap";
-	    listWrap.appendChild(colA);
-	    listWrap.appendChild(colB);
-	    listWrap.appendChild(colC);
+	    for (var i = 0, j = listTitles.length; i < j; ++i) {
+	        listWrap.appendChild(createList(listTitles[i], config_1.aboutPageLists[listTitles[i]]));
+	    }
 	    aboutPage.contentEl.appendChild(listWrap);
 	}
 	function initAbout() {
