@@ -49,6 +49,10 @@ function checkHash() {
     if (reg_page.test(hash)) {
         handleNavigate(hash.substring(1));
         history.replaceState({ page: currentPage }, currentPage, hash);
+    } else {
+        queueTask(showHome);
+        onBlur = hideHome;
+        currentPage = "home";
     }
 }
 

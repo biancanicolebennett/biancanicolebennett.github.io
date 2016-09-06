@@ -255,7 +255,6 @@
 	    homePage = new Page_1["default"]();
 	    homePage.setClassName("headline");
 	    homePage.setContent(config.headline);
-	    homePage.show();
 	    document.body.appendChild(homePage.el);
 	}
 	exports.initHome = initHome;
@@ -329,6 +328,11 @@
 	    if (reg_page.test(hash)) {
 	        handleNavigate(hash.substring(1));
 	        history.replaceState({ page: currentPage }, currentPage, hash);
+	    }
+	    else {
+	        taskqueue_1.queueTask(home_1.showHome);
+	        onBlur = home_1.hideHome;
+	        currentPage = "home";
 	    }
 	}
 	function initNav() {
