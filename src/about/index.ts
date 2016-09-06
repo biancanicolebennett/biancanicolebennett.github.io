@@ -37,11 +37,9 @@ function initLists() {
     aboutPage.contentEl.appendChild(listWrap);
 }
 
-
 export function initAbout() {
     aboutPage = new Page();
     aboutPage.setContent(bio);
-    aboutPage.hide();
     document.body.appendChild(aboutPage.el);
     queueTask(initLists);
 }

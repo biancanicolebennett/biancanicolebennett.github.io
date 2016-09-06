@@ -233,7 +233,6 @@
 	function initAbout() {
 	    aboutPage = new Page_1["default"]();
 	    aboutPage.setContent(config_1.bio);
-	    aboutPage.hide();
 	    document.body.appendChild(aboutPage.el);
 	    taskqueue_1.queueTask(initLists);
 	}
@@ -259,7 +258,6 @@
 	var contactPage;
 	function initContact() {
 	    contactPage = new Page_1["default"]();
-	    contactPage.hide();
 	    contactPage.setContent(config_1.email);
 	    contactPage.setClassName("contact-info");
 	    document.body.appendChild(contactPage.el);
@@ -334,7 +332,7 @@
 	    var navTo = event.target.getAttribute(linkAttr);
 	    if (navTo && navTo != currentPage)
 	        handleNavigate(navTo);
-	    history.pushState({ page: currentPage }, currentPage, currentPage);
+	    history.pushState({ page: currentPage }, currentPage, "#" + currentPage);
 	}
 	function handleNavigate(dest) {
 	    switch (dest) {
@@ -357,9 +355,18 @@
 	    }
 	    currentPage = dest;
 	}
+	function checkHash() {
+	    var hash = window.location.hash;
+	    var reg_page = /(home|about|contact)$/;
+	    if (reg_page.test(hash)) {
+	        handleNavigate(hash.substring(1));
+	        history.replaceState({ page: currentPage }, currentPage, hash);
+	    }
+	}
 	function initNav() {
 	    currentPage = "home";
 	    onBlur = home_1.hideHome;
+	    taskqueue_1.queueTask(checkHash);
 	    window.addEventListener("popstate", function (event) {
 	        if (event.state.page)
 	            handleNavigate(event.state.page);

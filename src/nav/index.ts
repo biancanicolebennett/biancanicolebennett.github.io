@@ -13,9 +13,9 @@ var onBlur;
 function clickLink(event) {
     let navTo = (<HTMLElement> event.target).getAttribute(linkAttr);
     if (navTo && navTo != currentPage) handleNavigate(navTo);
-    history.pushState({ page: currentPage }, currentPage, currentPage);
-
+    history.pushState({ page: currentPage }, currentPage, "#" + currentPage);
 }
+
 function handleNavigate(dest) {
     switch (dest) {
         case "home":
@@ -41,9 +41,19 @@ function handleNavigate(dest) {
     currentPage = dest;
 }
 
+function checkHash() {
+    let hash = window.location.hash;
+    let reg_page = /(home|about|contact)$/;
+    if (reg_page.test(hash)) {
+        handleNavigate(hash.substring(1));
+        history.replaceState({ page: currentPage }, currentPage, hash);
+    }
+}
+
 export function initNav() {
     currentPage = "home";
     onBlur = hideHome;
+    queueTask(checkHash);
     window.addEventListener("popstate", function(event) {
         if (event.state.page) handleNavigate(event.state.page);
     });
