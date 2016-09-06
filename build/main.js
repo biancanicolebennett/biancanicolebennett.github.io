@@ -68,60 +68,24 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(10);
-	var taskqueue_1 = __webpack_require__(2);
-	var nav_1 = __webpack_require__(11);
+	__webpack_require__(11);
+	var taskqueue_1 = __webpack_require__(1);
+	var nav_1 = __webpack_require__(13);
 	var home_1 = __webpack_require__(5);
 	var about_1 = __webpack_require__(3);
 	var contact_1 = __webpack_require__(4);
+	var bg_adjust_1 = __webpack_require__(12);
 	void function init() {
 	    taskqueue_1.queueTask(nav_1.initNav);
 	    taskqueue_1.queueTask(home_1.initHome);
 	    taskqueue_1.queueTask(about_1.initAbout);
 	    taskqueue_1.queueTask(contact_1.initContact);
+	    taskqueue_1.queueTask(bg_adjust_1.initSlider);
 	}();
 
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
-
-	"use strict";
-	function Page() {
-	    var el, wrap, contentEl;
-	    el = document.createElement("div");
-	    el.className = "page";
-	    el.style.top = "-100%"; // starts offscreen
-	    el.setAttribute("aria-hidden", "true");
-	    wrap = document.createElement("div");
-	    wrap.className = "content";
-	    contentEl = document.createElement("div");
-	    contentEl.className = "inner-block";
-	    wrap.appendChild(contentEl);
-	    el.appendChild(wrap);
-	    this.el = el;
-	    this.contentEl = contentEl;
-	}
-	exports.__esModule = true;
-	exports["default"] = Page;
-	Page.prototype.show = function () {
-	    this.el.setAttribute("aria-hidden", "false");
-	    this.el.style.top = "0";
-	};
-	Page.prototype.hide = function () {
-	    this.el.style.top = "-100%";
-	    this.el.setAttribute("aria-hidden", "true");
-	};
-	Page.prototype.setContent = function (text) {
-	    this.contentEl.textContent = text;
-	};
-	Page.prototype.setClassName = function (className) {
-	    this.contentEl.classList.add(className);
-	};
-
-
-/***/ },
-/* 2 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -167,13 +131,51 @@
 
 
 /***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	"use strict";
+	function Page() {
+	    var el, wrap, contentEl;
+	    el = document.createElement("div");
+	    el.className = "page";
+	    el.style.top = "-100%"; // starts offscreen
+	    el.setAttribute("aria-hidden", "true");
+	    wrap = document.createElement("div");
+	    wrap.className = "content";
+	    contentEl = document.createElement("div");
+	    contentEl.className = "inner-block";
+	    wrap.appendChild(contentEl);
+	    el.appendChild(wrap);
+	    this.el = el;
+	    this.contentEl = contentEl;
+	}
+	exports.__esModule = true;
+	exports["default"] = Page;
+	Page.prototype.show = function () {
+	    this.el.setAttribute("aria-hidden", "false");
+	    this.el.style.top = "0";
+	};
+	Page.prototype.hide = function () {
+	    this.el.style.top = "-100%";
+	    this.el.setAttribute("aria-hidden", "true");
+	};
+	Page.prototype.setContent = function (text) {
+	    this.contentEl.textContent = text;
+	};
+	Page.prototype.setClassName = function (className) {
+	    this.contentEl.classList.add(className);
+	};
+
+
+/***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	__webpack_require__(6);
-	var taskqueue_1 = __webpack_require__(2);
-	var Page_1 = __webpack_require__(1);
+	var taskqueue_1 = __webpack_require__(1);
+	var Page_1 = __webpack_require__(2);
 	var aboutPage;
 	function createList(title, items) {
 	    var listEl, titleEl, listItems, itemGroup;
@@ -223,8 +225,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(7);
-	var Page_1 = __webpack_require__(1);
+	__webpack_require__(8);
+	var Page_1 = __webpack_require__(2);
 	var contactPage;
 	function initContact() {
 	    contactPage = new Page_1["default"]();
@@ -248,8 +250,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(8);
-	var Page_1 = __webpack_require__(1);
+	__webpack_require__(9);
+	var Page_1 = __webpack_require__(2);
 	var homePage;
 	function initHome() {
 	    homePage = new Page_1["default"]();
@@ -284,11 +286,42 @@
 /* 10 */
 6,
 /* 11 */
+6,
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(9);
-	var taskqueue_1 = __webpack_require__(2);
+	__webpack_require__(7);
+	var taskqueue_1 = __webpack_require__(1);
+	var val;
+	var bg;
+	var slider;
+	function updateBackground() {
+	    bg.style.opacity = (slider.value / 100).toFixed(3);
+	}
+	function handleChange(event) {
+	    taskqueue_1.queueTask(updateBackground);
+	}
+	function initSlider() {
+	    bg = document.getElementById("background");
+	    slider = document.createElement("input");
+	    slider.type = "range";
+	    slider.className = "slider";
+	    slider.min = "0";
+	    slider.max = "100";
+	    slider.addEventListener("change", handleChange);
+	    document.body.appendChild(slider);
+	}
+	exports.initSlider = initSlider;
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	__webpack_require__(10);
+	var taskqueue_1 = __webpack_require__(1);
 	var home_1 = __webpack_require__(5);
 	var about_1 = __webpack_require__(3);
 	var contact_1 = __webpack_require__(4);

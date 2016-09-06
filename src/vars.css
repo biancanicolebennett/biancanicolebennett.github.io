@@ -1,6 +1,6 @@
 :root {
-    --background: #ffbab0;
-
+    --background: #ffd7d2;
+    --background--dark: #ffbab0;
     --body-font: 'Open Sans', sans-serif;
     --text-color: white;
     --text-color-hover: gray;
