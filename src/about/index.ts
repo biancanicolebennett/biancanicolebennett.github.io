@@ -1,7 +1,9 @@
 import "./styles.css";
-import { bio, aboutPageLists } from "../config";
 import { queueTask } from "../taskqueue";
 import Page from "../Page";
+
+// root level config.js
+declare var config;
 
 var aboutPage;
 
@@ -29,17 +31,16 @@ function createList(title: string, items: string[]) {
 
 function initLists() {
     let listWrap = document.createElement("div");
-    let listTitles = Object.keys(aboutPageLists);
     listWrap.className = "list-wrap";
-    for (let i = 0, j = listTitles.length; i < j; ++i) {
-        listWrap.appendChild(createList(listTitles[i], aboutPageLists[listTitles[i]]));
+    for (let group in config.aboutPageLists) {
+        listWrap.appendChild(createList(group, config.aboutPageLists[group]));
     }
     aboutPage.contentEl.appendChild(listWrap);
 }
 
 export function initAbout() {
     aboutPage = new Page();
-    aboutPage.setContent(bio);
+    aboutPage.setContent(config.bio);
     document.body.appendChild(aboutPage.el);
     queueTask(initLists);
 }

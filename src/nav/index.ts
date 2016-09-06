@@ -1,9 +1,11 @@
 import "./styles.css";
-import { links } from "../config";
 import { queueTask } from "../taskqueue";
 import { showHome, hideHome } from "../home";
 import { showAbout, hideAbout } from "../about";
 import { showContact, hideContact } from "../contact";
+
+// root level config.js
+declare var config;
 
 const linkAttr = "data-link";
 
@@ -51,6 +53,7 @@ function checkHash() {
 }
 
 export function initNav() {
+    let links = config.links;
     currentPage = "home";
     onBlur = hideHome;
     queueTask(checkHash);

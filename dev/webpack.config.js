@@ -5,7 +5,6 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var srcPath = path.resolve(__dirname, "..", "src");
 var buildPath = path.resolve(__dirname, "..", "build");
 
-
 var extractCSS = new ExtractTextPlugin("main.css");
 
 module.exports = {

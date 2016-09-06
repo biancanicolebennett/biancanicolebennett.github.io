@@ -68,12 +68,12 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(11);
-	var taskqueue_1 = __webpack_require__(3);
-	var nav_1 = __webpack_require__(12);
-	var home_1 = __webpack_require__(6);
-	var about_1 = __webpack_require__(4);
-	var contact_1 = __webpack_require__(5);
+	__webpack_require__(10);
+	var taskqueue_1 = __webpack_require__(2);
+	var nav_1 = __webpack_require__(11);
+	var home_1 = __webpack_require__(5);
+	var about_1 = __webpack_require__(3);
+	var contact_1 = __webpack_require__(4);
 	void function init() {
 	    taskqueue_1.queueTask(nav_1.initNav);
 	    taskqueue_1.queueTask(home_1.initHome);
@@ -84,33 +84,6 @@
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
-
-	"use strict";
-	exports.headline = "Bianca is a research-focused UX Designer in New York City.";
-	exports.bio = "Bianca's from Hawaii. She does UX stuff.";
-	exports.email = "biancanicolebennett@gmail.com";
-	exports.aboutPageLists = {
-	    "skills": [
-	        "wireframing",
-	        "prototyping",
-	        "Design Studio",
-	        "persona profiling",
-	        "client interviews",
-	        "heatmapping"
-	    ],
-	    "experience": [
-	        "ya"
-	    ]
-	};
-	exports.links = [
-	    "contact",
-	    "about"
-	];
-
-
-/***/ },
-/* 2 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -148,7 +121,7 @@
 
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -194,14 +167,13 @@
 
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(7);
-	var config_1 = __webpack_require__(1);
-	var taskqueue_1 = __webpack_require__(3);
-	var Page_1 = __webpack_require__(2);
+	__webpack_require__(6);
+	var taskqueue_1 = __webpack_require__(2);
+	var Page_1 = __webpack_require__(1);
 	var aboutPage;
 	function createList(title, items) {
 	    var listEl, titleEl, listItems, itemGroup;
@@ -223,16 +195,15 @@
 	}
 	function initLists() {
 	    var listWrap = document.createElement("div");
-	    var listTitles = Object.keys(config_1.aboutPageLists);
 	    listWrap.className = "list-wrap";
-	    for (var i = 0, j = listTitles.length; i < j; ++i) {
-	        listWrap.appendChild(createList(listTitles[i], config_1.aboutPageLists[listTitles[i]]));
+	    for (var group in config.aboutPageLists) {
+	        listWrap.appendChild(createList(group, config.aboutPageLists[group]));
 	    }
 	    aboutPage.contentEl.appendChild(listWrap);
 	}
 	function initAbout() {
 	    aboutPage = new Page_1["default"]();
-	    aboutPage.setContent(config_1.bio);
+	    aboutPage.setContent(config.bio);
 	    document.body.appendChild(aboutPage.el);
 	    taskqueue_1.queueTask(initLists);
 	}
@@ -248,17 +219,16 @@
 
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(8);
-	var Page_1 = __webpack_require__(2);
-	var config_1 = __webpack_require__(1);
+	__webpack_require__(7);
+	var Page_1 = __webpack_require__(1);
 	var contactPage;
 	function initContact() {
 	    contactPage = new Page_1["default"]();
-	    contactPage.setContent(config_1.email);
+	    contactPage.setContent(config.email);
 	    contactPage.setClassName("contact-info");
 	    document.body.appendChild(contactPage.el);
 	}
@@ -274,18 +244,17 @@
 
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(9);
-	var config_1 = __webpack_require__(1);
-	var Page_1 = __webpack_require__(2);
+	__webpack_require__(8);
+	var Page_1 = __webpack_require__(1);
 	var homePage;
 	function initHome() {
 	    homePage = new Page_1["default"]();
 	    homePage.setClassName("headline");
-	    homePage.setContent(config_1.headline);
+	    homePage.setContent(config.headline);
 	    homePage.show();
 	    document.body.appendChild(homePage.el);
 	}
@@ -301,30 +270,29 @@
 
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
+/* 7 */
+6,
 /* 8 */
-7,
+6,
 /* 9 */
-7,
+6,
 /* 10 */
-7,
+6,
 /* 11 */
-7,
-/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(10);
-	var config_1 = __webpack_require__(1);
-	var taskqueue_1 = __webpack_require__(3);
-	var home_1 = __webpack_require__(6);
-	var about_1 = __webpack_require__(4);
-	var contact_1 = __webpack_require__(5);
+	__webpack_require__(9);
+	var taskqueue_1 = __webpack_require__(2);
+	var home_1 = __webpack_require__(5);
+	var about_1 = __webpack_require__(3);
+	var contact_1 = __webpack_require__(4);
 	var linkAttr = "data-link";
 	var currentPage;
 	var onBlur;
@@ -364,6 +332,7 @@
 	    }
 	}
 	function initNav() {
+	    var links = config.links;
 	    currentPage = "home";
 	    onBlur = home_1.hideHome;
 	    taskqueue_1.queueTask(checkHash);
@@ -373,11 +342,11 @@
 	    });
 	    var linksEl = document.getElementById("links");
 	    linksEl.addEventListener("click", clickLink, false);
-	    for (var i = 0; i < config_1.links.length; ++i) {
+	    for (var i = 0; i < links.length; ++i) {
 	        var el = document.createElement("div");
 	        el.className = "link";
-	        el.textContent = config_1.links[i];
-	        el.setAttribute(linkAttr, config_1.links[i]);
+	        el.textContent = links[i];
+	        el.setAttribute(linkAttr, links[i]);
 	        linksEl.appendChild(el);
 	    }
 	}
