@@ -293,57 +293,47 @@
 	var about_1 = __webpack_require__(3);
 	var contact_1 = __webpack_require__(4);
 	var linkAttr = "data-link";
-	var currentPage;
-	var onBlur;
-	function clickLink(event) {
-	    var navTo = event.target.getAttribute(linkAttr);
-	    if (navTo && navTo != currentPage)
-	        handleNavigate(navTo);
-	    history.pushState({ page: currentPage }, currentPage, "#" + currentPage);
-	}
+	var currentPage, pageNames, showActions, blurActions;
+	/**
+	 * @param  {string}  dest name of page
+	 * @return {boolean}      true if current page will change
+	 */
 	function handleNavigate(dest) {
-	    switch (dest) {
-	        case "home":
-	            taskqueue_1.queueTask(onBlur);
-	            taskqueue_1.queueTask(home_1.showHome);
-	            onBlur = home_1.hideHome;
-	            break;
-	        case "about":
-	            taskqueue_1.queueTask(onBlur);
-	            taskqueue_1.queueTask(about_1.showAbout);
-	            onBlur = about_1.hideAbout;
-	            break;
-	        case "contact":
-	            taskqueue_1.queueTask(onBlur);
-	            taskqueue_1.queueTask(contact_1.showContact);
-	            onBlur = contact_1.hideContact;
-	            break;
-	        default: return;
+	    var i = pageNames.indexOf(dest);
+	    if (~i && i !== currentPage) {
+	        if (~currentPage) {
+	            taskqueue_1.queueTask(blurActions[currentPage]);
+	        }
+	        currentPage = i;
+	        taskqueue_1.queueTask(showActions[currentPage]);
+	        return true;
 	    }
-	    currentPage = dest;
+	    return false;
 	}
+	/**
+	 * event handlers
+	 */
+	function clickLink(event) {
+	    if (handleNavigate(event.target.getAttribute(linkAttr))) {
+	        history.pushState({ page: pageNames[currentPage] }, pageNames[currentPage], "#/" + pageNames[currentPage]);
+	    }
+	}
+	function handlePopState(event) {
+	    if (event.state && event.state.hasOwnProperty("page")) {
+	        handleNavigate(event.state.page);
+	    }
+	}
+	/**
+	 * init tasks
+	 */
 	function checkHash() {
-	    var hash = window.location.hash;
-	    var reg_page = /(home|about|contact)$/;
-	    if (reg_page.test(hash)) {
-	        handleNavigate(hash.substring(1));
-	        history.replaceState({ page: currentPage }, currentPage, hash);
-	    }
-	    else {
-	        taskqueue_1.queueTask(home_1.showHome);
-	        onBlur = home_1.hideHome;
-	        currentPage = "home";
-	    }
+	    var hash = window.location.hash.match(/(home|about|contact)$/);
+	    handleNavigate(hash && hash.length ? hash[0] : "home");
+	    window.addEventListener("popstate", handlePopState);
+	    history.replaceState({ page: pageNames[currentPage] }, pageNames[currentPage], "#/" + pageNames[currentPage]);
 	}
-	function initNav() {
+	function initLinks() {
 	    var links = config.links;
-	    currentPage = "home";
-	    onBlur = home_1.hideHome;
-	    taskqueue_1.queueTask(checkHash);
-	    window.addEventListener("popstate", function (event) {
-	        if (event.state.page)
-	            handleNavigate(event.state.page);
-	    });
 	    var linksEl = document.getElementById("links");
 	    linksEl.addEventListener("click", clickLink, false);
 	    for (var i = 0; i < links.length; ++i) {
@@ -353,6 +343,14 @@
 	        el.setAttribute(linkAttr, links[i]);
 	        linksEl.appendChild(el);
 	    }
+	}
+	function initNav() {
+	    currentPage = -1;
+	    pageNames = ["home", "about", "contact"];
+	    showActions = [home_1.showHome, about_1.showAbout, contact_1.showContact];
+	    blurActions = [home_1.hideHome, about_1.hideAbout, contact_1.hideContact];
+	    taskqueue_1.queueTask(checkHash);
+	    taskqueue_1.queueTask(initLinks);
 	}
 	exports.initNav = initNav;
 
