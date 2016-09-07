@@ -1,6 +1,6 @@
 :root {
     --background: #ffd7d2;
-    --background--dark: #ffbab0;
+    --background--dark: #ffa598;
     --body-font: 'Open Sans', sans-serif;
     --text-color: white;
     --text-color-hover: gray;
@@ -28,5 +28,4 @@
     --nav-height: 80px;
 
     --page-margins: 32px;
-    --page-transition: top 300ms ease;
 }

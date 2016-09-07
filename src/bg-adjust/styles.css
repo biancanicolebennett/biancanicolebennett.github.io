@@ -5,6 +5,7 @@
     left: 32px;
     top: 50%;
     z-index: 1;
+    outline: none;
     transform-origin: left top;
     transform: rotate(90deg) translateX(-64px);
 }

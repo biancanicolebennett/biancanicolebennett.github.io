@@ -41,7 +41,7 @@ function initLists() {
 export function initAbout() {
     aboutPage = new Page();
     aboutPage.setContent(config.bio);
-    document.body.appendChild(aboutPage.el);
+    aboutPage.mountTo(document.body);
     queueTask(initLists);
 }
 

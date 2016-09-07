@@ -10,7 +10,7 @@ export function initHome() {
     homePage = new Page();
     homePage.setClassName("headline");
     homePage.setContent(config.headline);
-    document.body.appendChild(homePage.el);
+    homePage.mountTo(document.body);
 }
 
 export function showHome() {

@@ -10,7 +10,7 @@ export function initContact() {
     contactPage = new Page();
     contactPage.setContent(config.email);
     contactPage.setClassName("contact-info");
-    document.body.appendChild(contactPage.el);
+    contactPage.mountTo(document.body);
 }
 
 export function showContact() {

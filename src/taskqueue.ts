@@ -6,21 +6,10 @@ var total = 0;
 var ready = true;
 var end;
 
-
-function dedupe() {
-    let i = index, task = tasks[i];
-    while (++i < total) {
-        if (tasks[i] == task) tasks[i] = null;
-    }
-    task = tasks[i] = null;
-}
-
 function runTasks(start) {
     do {
-        if (tasks[index] !== null) {
-            tasks[index]();
-            dedupe();
-        }
+        tasks[index]();
+        tasks[index] = null;
         end = now();
     } while ((++index < total) && end - start < 3);
 

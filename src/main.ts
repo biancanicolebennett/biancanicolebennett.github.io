@@ -6,7 +6,6 @@ import { initAbout } from "./about";
 import { initContact } from "./contact";
 import { initSlider } from "./bg-adjust";
 
-
 void function init() {
     queueTask(initNav);
     queueTask(initHome);
