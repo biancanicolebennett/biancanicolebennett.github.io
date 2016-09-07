@@ -8,9 +8,10 @@ var buildPath = path.resolve(__dirname, "..", "build");
 var extractCSS = new ExtractTextPlugin("main.css");
 
 module.exports = {
-    entry: path.resolve(srcPath, "main.ts"),
+    entry: [path.resolve(srcPath, "main.ts")],
     output: {
         path: buildPath,
+        publicPath: "/build/",
         filename: "main.js"
     },
     target: "web",
@@ -40,10 +41,8 @@ module.exports = {
     node: {
         fs: "empty"
     },
-    postcss: function () {
-        return [
-            require('postcss-import')(),
-            require('postcss-cssnext')()
-        ];
-    }
+    postcss: [
+        require('postcss-import')(),
+        require('postcss-cssnext')()
+    ]
 };

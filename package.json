@@ -5,7 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup": "npm link webpack && npm install",
-    "build": "webpack --config dev/webpack.config.js"
+    "build": "webpack --config dev/webpack.prod.config.js",
+    "start": "node dev/devserver.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "postcss-loader": "^0.11.1",
     "style-loader": "^0.13.1",
     "ts-loader": "^0.8.2",
-    "typescript": "^1.8.10"
+    "typescript": "^1.8.10",
+    "webpack-dev-server": "^1.15.1"
   }
 }

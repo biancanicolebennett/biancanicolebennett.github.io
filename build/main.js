@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/build/";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -67,61 +67,11 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
-	__webpack_require__(10);
-	var taskqueue_1 = __webpack_require__(2);
-	var nav_1 = __webpack_require__(11);
-	var home_1 = __webpack_require__(5);
-	var about_1 = __webpack_require__(3);
-	var contact_1 = __webpack_require__(4);
-	void function init() {
-	    taskqueue_1.queueTask(nav_1.initNav);
-	    taskqueue_1.queueTask(home_1.initHome);
-	    taskqueue_1.queueTask(about_1.initAbout);
-	    taskqueue_1.queueTask(contact_1.initContact);
-	}();
+	module.exports = __webpack_require__(13);
 
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
-
-	"use strict";
-	function Page() {
-	    var el, wrap, contentEl;
-	    el = document.createElement("div");
-	    el.className = "page";
-	    el.style.top = "-100%"; // starts offscreen
-	    el.setAttribute("aria-hidden", "true");
-	    wrap = document.createElement("div");
-	    wrap.className = "content";
-	    contentEl = document.createElement("div");
-	    contentEl.className = "inner-block";
-	    wrap.appendChild(contentEl);
-	    el.appendChild(wrap);
-	    this.el = el;
-	    this.contentEl = contentEl;
-	}
-	exports.__esModule = true;
-	exports["default"] = Page;
-	Page.prototype.show = function () {
-	    this.el.setAttribute("aria-hidden", "false");
-	    this.el.style.top = "0";
-	};
-	Page.prototype.hide = function () {
-	    this.el.style.top = "-100%";
-	    this.el.setAttribute("aria-hidden", "true");
-	};
-	Page.prototype.setContent = function (text) {
-	    this.contentEl.textContent = text;
-	};
-	Page.prototype.setClassName = function (className) {
-	    this.contentEl.classList.add(className);
-	};
-
-
-/***/ },
-/* 2 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -132,20 +82,10 @@
 	var total = 0;
 	var ready = true;
 	var end;
-	function dedupe() {
-	    var i = index, task = tasks[i];
-	    while (++i < total) {
-	        if (tasks[i] == task)
-	            tasks[i] = null;
-	    }
-	    task = tasks[i] = null;
-	}
 	function runTasks(start) {
 	    do {
-	        if (tasks[index] !== null) {
-	            tasks[index]();
-	            dedupe();
-	        }
+	        tasks[index]();
+	        tasks[index] = null;
 	        end = now();
 	    } while ((++index < total) && end - start < 3);
 	    if (index >= total) {
@@ -167,13 +107,106 @@
 
 
 /***/ },
+/* 2 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var taskqueue_1 = __webpack_require__(1);
+	var now = window.performance && window.performance.now ?
+	    window.performance.now.bind(window.performance) : Date.now;
+	var c0 = config.pageTransition[0];
+	var c1 = config.pageTransition[1];
+	var c2 = config.pageTransition[2];
+	var c3 = config.pageTransition[3] * -1;
+	function cubicBezierStr(t, p0, p1, p2, p3) {
+	    var u = 1 - t;
+	    var tt = t * t;
+	    var uu = u * u;
+	    var p = (uu * u * p0) +
+	        (3 * uu * t * p1) +
+	        (3 * u * tt * p2) +
+	        (tt * t * p3);
+	    return p + "px";
+	}
+	function Page() {
+	    var self, el, wrap, contentEl, p0, p1, p2, p3, duration, startTime, isMoving, isVisible;
+	    isVisible = false;
+	    duration = 300;
+	    el = document.createElement("div");
+	    el.className = "page";
+	    wrap = document.createElement("div");
+	    wrap.className = "content";
+	    contentEl = document.createElement("div");
+	    contentEl.className = "inner-block";
+	    wrap.appendChild(contentEl);
+	    el.appendChild(wrap);
+	    self = this;
+	    function finish() {
+	        if (isVisible) {
+	            el.style.top = "0px";
+	        }
+	        else {
+	            el.remove();
+	        }
+	    }
+	    function animate() {
+	        var t = (now() - startTime) / duration;
+	        if (t < 0.99) {
+	            el.style.top = cubicBezierStr(t, p0, p1, p2, p3);
+	            taskqueue_1.queueTask(animate);
+	        }
+	        else {
+	            taskqueue_1.queueTask(finish);
+	        }
+	    }
+	    this.contentEl = contentEl;
+	    this.show = function () {
+	        if (!isVisible) {
+	            isVisible = true;
+	            p0 = c3 * window.innerHeight;
+	            p1 = p0 * c2;
+	            p2 = p0 * c1;
+	            p3 = p0 * c0;
+	            el.style.top = p0 + "px";
+	            self.parent.appendChild(el);
+	            startTime = now();
+	            taskqueue_1.queueTask(animate);
+	        }
+	    };
+	    this.hide = function () {
+	        if (isVisible) {
+	            isVisible = false;
+	            p3 = c3 * window.innerHeight;
+	            p2 = p3 * c2;
+	            p1 = p3 * c1;
+	            p0 = p3 * c0;
+	            startTime = now();
+	            taskqueue_1.queueTask(animate);
+	        }
+	    };
+	}
+	exports.__esModule = true;
+	exports["default"] = Page;
+	Page.prototype.parent = document.body;
+	Page.prototype.mountTo = function (parent) {
+	    this.parent = parent;
+	};
+	Page.prototype.setContent = function (text) {
+	    this.contentEl.textContent = text;
+	};
+	Page.prototype.setClassName = function (className) {
+	    this.contentEl.classList.add(className);
+	};
+
+
+/***/ },
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	__webpack_require__(6);
-	var taskqueue_1 = __webpack_require__(2);
-	var Page_1 = __webpack_require__(1);
+	var taskqueue_1 = __webpack_require__(1);
+	var Page_1 = __webpack_require__(2);
 	var aboutPage;
 	function createList(title, items) {
 	    var listEl, titleEl, listItems, itemGroup;
@@ -204,7 +237,7 @@
 	function initAbout() {
 	    aboutPage = new Page_1["default"]();
 	    aboutPage.setContent(config.bio);
-	    document.body.appendChild(aboutPage.el);
+	    aboutPage.mountTo(document.body);
 	    taskqueue_1.queueTask(initLists);
 	}
 	exports.initAbout = initAbout;
@@ -223,14 +256,14 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(7);
-	var Page_1 = __webpack_require__(1);
+	__webpack_require__(8);
+	var Page_1 = __webpack_require__(2);
 	var contactPage;
 	function initContact() {
 	    contactPage = new Page_1["default"]();
 	    contactPage.setContent(config.email);
 	    contactPage.setClassName("contact-info");
-	    document.body.appendChild(contactPage.el);
+	    contactPage.mountTo(document.body);
 	}
 	exports.initContact = initContact;
 	function showContact() {
@@ -248,14 +281,14 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(8);
-	var Page_1 = __webpack_require__(1);
+	__webpack_require__(9);
+	var Page_1 = __webpack_require__(2);
 	var homePage;
 	function initHome() {
 	    homePage = new Page_1["default"]();
 	    homePage.setClassName("headline");
 	    homePage.setContent(config.headline);
-	    document.body.appendChild(homePage.el);
+	    homePage.mountTo(document.body);
 	}
 	exports.initHome = initHome;
 	function showHome() {
@@ -284,11 +317,63 @@
 /* 10 */
 6,
 /* 11 */
+6,
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(9);
-	var taskqueue_1 = __webpack_require__(2);
+	__webpack_require__(7);
+	var taskqueue_1 = __webpack_require__(1);
+	var val;
+	var bg;
+	var slider;
+	function updateBackground() {
+	    bg.style.opacity = (slider.value / 100).toFixed(3);
+	}
+	function handleChange(event) {
+	    taskqueue_1.queueTask(updateBackground);
+	}
+	function initSlider() {
+	    bg = document.getElementById("background");
+	    slider = document.createElement("input");
+	    slider.type = "range";
+	    slider.className = "slider";
+	    slider.min = "0";
+	    slider.max = "100";
+	    slider.addEventListener("change", handleChange);
+	    document.body.appendChild(slider);
+	}
+	exports.initSlider = initSlider;
+
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	__webpack_require__(11);
+	var taskqueue_1 = __webpack_require__(1);
+	var nav_1 = __webpack_require__(14);
+	var home_1 = __webpack_require__(5);
+	var about_1 = __webpack_require__(3);
+	var contact_1 = __webpack_require__(4);
+	var bg_adjust_1 = __webpack_require__(12);
+	void function init() {
+	    taskqueue_1.queueTask(nav_1.initNav);
+	    taskqueue_1.queueTask(home_1.initHome);
+	    taskqueue_1.queueTask(about_1.initAbout);
+	    taskqueue_1.queueTask(contact_1.initContact);
+	    taskqueue_1.queueTask(bg_adjust_1.initSlider);
+	}();
+
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	__webpack_require__(10);
+	var taskqueue_1 = __webpack_require__(1);
 	var home_1 = __webpack_require__(5);
 	var about_1 = __webpack_require__(3);
 	var contact_1 = __webpack_require__(4);

@@ -15,7 +15,6 @@ html, body {
     right: var(--page-margins);
     top: 0;
     height: 100%;
-    transition: var(--page-transition);
 }
 
 .content {

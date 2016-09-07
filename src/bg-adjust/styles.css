@@ -1,0 +1,23 @@
+@import "../vars.css";
+
+.slider {
+    position: fixed;
+    left: 32px;
+    top: 50%;
+    z-index: 1;
+    outline: none;
+    transform-origin: left top;
+    transform: rotate(90deg) translateX(-64px);
+}
+
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: var(--background--dark);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.5;
+}
