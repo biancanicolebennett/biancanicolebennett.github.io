@@ -1,5 +1,5 @@
 import "./styles.css";
-import { queueTask } from "../taskqueue";
+import { queueTask } from "taskqueue";
 
 var val;
 var bg;

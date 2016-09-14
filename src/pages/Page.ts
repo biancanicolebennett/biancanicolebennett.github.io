@@ -1,4 +1,4 @@
-import { queueTask } from "./taskqueue";
+import { queueTask } from "taskqueue";
 var now = window.performance && window.performance.now ?
     window.performance.now.bind(window.performance) : Date.now;
 

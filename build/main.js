@@ -204,7 +204,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(6);
+	__webpack_require__(8);
 	var taskqueue_1 = __webpack_require__(1);
 	var Page_1 = __webpack_require__(2);
 	var aboutPage;
@@ -255,7 +255,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(8);
+	__webpack_require__(9);
 	var Page_1 = __webpack_require__(2);
 	var contactPage;
 	function initContact() {
@@ -280,7 +280,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(9);
+	__webpack_require__(10);
 	var Page_1 = __webpack_require__(2);
 	var homePage;
 	function initHome() {
@@ -321,7 +321,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(7);
+	__webpack_require__(6);
 	var taskqueue_1 = __webpack_require__(1);
 	var val;
 	var bg;
@@ -350,18 +350,13 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(11);
 	var taskqueue_1 = __webpack_require__(1);
+	var pages_1 = __webpack_require__(15);
 	var nav_1 = __webpack_require__(14);
-	var home_1 = __webpack_require__(5);
-	var about_1 = __webpack_require__(3);
-	var contact_1 = __webpack_require__(4);
 	var bg_adjust_1 = __webpack_require__(12);
 	void function init() {
+	    taskqueue_1.queueTask(pages_1.initPages);
 	    taskqueue_1.queueTask(nav_1.initNav);
-	    taskqueue_1.queueTask(home_1.initHome);
-	    taskqueue_1.queueTask(about_1.initAbout);
-	    taskqueue_1.queueTask(contact_1.initContact);
 	    taskqueue_1.queueTask(bg_adjust_1.initSlider);
 	}();
 
@@ -371,7 +366,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(10);
+	__webpack_require__(7);
 	var taskqueue_1 = __webpack_require__(1);
 	var home_1 = __webpack_require__(5);
 	var about_1 = __webpack_require__(3);
@@ -437,6 +432,24 @@
 	    taskqueue_1.queueTask(initLinks);
 	}
 	exports.initNav = initNav;
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	__webpack_require__(11);
+	var taskqueue_1 = __webpack_require__(1);
+	var home_1 = __webpack_require__(5);
+	var about_1 = __webpack_require__(3);
+	var contact_1 = __webpack_require__(4);
+	function initPages() {
+	    taskqueue_1.queueTask(home_1.initHome);
+	    taskqueue_1.queueTask(about_1.initAbout);
+	    taskqueue_1.queueTask(contact_1.initContact);
+	}
+	exports.initPages = initPages;
 
 
 /***/ }

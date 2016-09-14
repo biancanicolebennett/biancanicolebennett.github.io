@@ -5,6 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup": "npm link webpack && npm install",
+    "webpack": "webpack --config dev/webpack.config.js",
     "build": "webpack --config dev/webpack.prod.config.js",
     "start": "node dev/devserver.js"
   },

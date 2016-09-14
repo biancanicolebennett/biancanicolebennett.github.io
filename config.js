@@ -43,7 +43,7 @@ var config = {
      * design
      */
 
-    pageTransition: [ 0, 0.2, 0.5, 1 ], // cubic bezier
+    pageTransition: [ 0, 0, 0.6, 1 ], // cubic bezier
     pageTransitionDuration: 300 // ms
 
 };
