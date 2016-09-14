@@ -21,7 +21,7 @@ function cubicBezierStr( t: number, p0: number, p1: number, p2: number, p3: numb
             (3 * u * tt * p2) +
             (tt * t * p3);
 
-    return p + "px";
+    return  "translateY(" + p + "px)";
 }
 
 export default function Page() {
@@ -47,7 +47,7 @@ export default function Page() {
 
     function finish() {
         if (isVisible) {
-            el.style.top = "0px";
+            el.style.transform = "translateY(0px)";
         } else {
             el.remove();
         }
@@ -56,7 +56,7 @@ export default function Page() {
     function animate() {
         let t = (now() - startTime) / duration;
         if (t < 0.99) {
-            el.style.top = cubicBezierStr(t, p0, p1, p2, p3);
+            el.style.transform = cubicBezierStr(t, p0, p1, p2, p3);
             queueTask(animate);
         } else {
             queueTask(finish);
@@ -72,7 +72,7 @@ export default function Page() {
             p1 = p0 * c2;
             p2 = p0 * c1;
             p3 = p0 * c0;
-            el.style.top = p0 + "px";
+            el.style.transform = "translateY(" + p0 + "px)";
 
             self.parent.appendChild(el);
             startTime = now();

@@ -127,7 +127,7 @@
 	        (3 * uu * t * p1) +
 	        (3 * u * tt * p2) +
 	        (tt * t * p3);
-	    return p + "px";
+	    return "translateY(" + p + "px)";
 	}
 	function Page() {
 	    var self, el, wrap, contentEl, p0, p1, p2, p3, startTime, isMoving, isVisible;
@@ -143,7 +143,7 @@
 	    self = this;
 	    function finish() {
 	        if (isVisible) {
-	            el.style.top = "0px";
+	            el.style.transform = "translateY(0px)";
 	        }
 	        else {
 	            el.remove();
@@ -152,7 +152,7 @@
 	    function animate() {
 	        var t = (now() - startTime) / duration;
 	        if (t < 0.99) {
-	            el.style.top = cubicBezierStr(t, p0, p1, p2, p3);
+	            el.style.transform = cubicBezierStr(t, p0, p1, p2, p3);
 	            taskqueue_1.queueTask(animate);
 	        }
 	        else {
@@ -167,7 +167,7 @@
 	            p1 = p0 * c2;
 	            p2 = p0 * c1;
 	            p3 = p0 * c0;
-	            el.style.top = p0 + "px";
+	            el.style.transform = "translateY(" + p0 + "px)";
 	            self.parent.appendChild(el);
 	            startTime = now();
 	            taskqueue_1.queueTask(animate);
