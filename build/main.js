@@ -334,7 +334,7 @@
 	}
 	function checkCookie() {
 	    var matches = document.cookie.match(reg_bg);
-	    if (matches.length) {
+	    if (matches && matches.length) {
 	        var val = parseInt(matches[0].substring(cookiename.length));
 	        if (isFinite(val)) {
 	            slider.value = val;
