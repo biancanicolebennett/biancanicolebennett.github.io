@@ -1,21 +1,35 @@
 var config = {
+    /**
+     * content
+     */
+
     headline: "Bianca is a research-focused UX Designer in New York City.",
 
-    bio: "Bianca's from Hawaii. She does UX stuff.",
+    bio: "I am a UX designer with a background in project management currently residing in New York, New York by way of Kaimuki, Hawaii. On weekends you can find me volunteering at the American Museum of Natural History, making desserts, or surfing.\nI explore, construct, and communicate.",
 
     email: "biancanicolebennett@gmail.com",
 
     aboutPageLists: {
-        skills: [
-            "wireframing",
-            "prototyping",
+        "UX Process": [
+            "User Research and Design",
+            "Project Management",
+            "Usability Testing",
+            "Affinity Mapping",
+            "Empathy Mapping",
+            "Heuristic Analysis",
+            "Persona Development",
             "Design Studio",
-            "persona profiling",
-            "client interviews",
-            "heatmapping"
+            "Prototyping",
+            "Multiple-Fidelity Wireframing"
         ],
-        experience: [
-            "ya"
+        "Technical Skills": [
+            "Sketch",
+            "Invision",
+            "Omnigraffle",
+            "Adobe Photoshop",
+            "Trac",
+            "Trello",
+            "iWork"
         ]
     },
 
@@ -24,6 +38,12 @@ var config = {
         "about"
     ],
 
-    // cubic bezier
-    pageTransition: [ 0, 0.2, 0.5, 1 ]
+
+    /**
+     * design
+     */
+
+    pageTransition: [ 0, 0.2, 0.5, 1 ], // cubic bezier
+    pageTransitionDuration: 300 // ms
+
 };

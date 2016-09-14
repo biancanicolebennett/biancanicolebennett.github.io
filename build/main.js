@@ -118,6 +118,7 @@
 	var c1 = config.pageTransition[1];
 	var c2 = config.pageTransition[2];
 	var c3 = config.pageTransition[3] * -1;
+	var duration = config.pageTransitionDuration;
 	function cubicBezierStr(t, p0, p1, p2, p3) {
 	    var u = 1 - t;
 	    var tt = t * t;
@@ -129,9 +130,8 @@
 	    return p + "px";
 	}
 	function Page() {
-	    var self, el, wrap, contentEl, p0, p1, p2, p3, duration, startTime, isMoving, isVisible;
+	    var self, el, wrap, contentEl, p0, p1, p2, p3, startTime, isMoving, isVisible;
 	    isVisible = false;
-	    duration = 300;
 	    el = document.createElement("div");
 	    el.className = "page";
 	    wrap = document.createElement("div");
@@ -216,12 +216,10 @@
 	    titleEl.className = "list-title";
 	    titleEl.textContent = title;
 	    listItems = document.createElement("div");
-	    for (var i = 0; i < items.length; i += 4) {
-	        itemGroup = document.createElement("div");
-	        itemGroup.className = "list";
-	        itemGroup.textContent = items.slice(i, i + 4).join("\n");
-	        listItems.appendChild(itemGroup);
-	    }
+	    itemGroup = document.createElement("div");
+	    itemGroup.className = "list";
+	    itemGroup.textContent = items.join("\n");
+	    listItems.appendChild(itemGroup);
 	    listEl.appendChild(titleEl);
 	    listEl.appendChild(listItems);
 	    return listEl;
@@ -236,6 +234,7 @@
 	}
 	function initAbout() {
 	    aboutPage = new Page_1["default"]();
+	    aboutPage.setClassName("about");
 	    aboutPage.setContent(config.bio);
 	    aboutPage.mountTo(document.body);
 	    taskqueue_1.queueTask(initLists);
@@ -262,7 +261,7 @@
 	function initContact() {
 	    contactPage = new Page_1["default"]();
 	    contactPage.setContent(config.email);
-	    contactPage.setClassName("contact-info");
+	    contactPage.setClassName("contact");
 	    contactPage.mountTo(document.body);
 	}
 	exports.initContact = initContact;

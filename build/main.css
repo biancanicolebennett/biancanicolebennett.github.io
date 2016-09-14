@@ -25,10 +25,11 @@ html, body {
 
 .inner-block {
     position: absolute;
-    top: 140px;
+    top: 200px;
     right: 0;
     width: 800px;
     max-width: 100%;
+    white-space: pre-wrap;
 }
 #nav {
     position: fixed;
@@ -74,6 +75,10 @@ html, body {
     font-weight: 700;
     font-size: 64px;
 }
+.about {
+    font-size: 28px;
+}
+
 .list-wrap {
     margin-top: 40px;
     border-top: 1px solid white;
@@ -82,7 +87,9 @@ html, body {
 
 .list {
     float: left;
-    min-width: 240px;
+    min-width: 250px;
+    font-size: 15px;
+    line-height: 1.65em;
 }
 
 .list-title {
@@ -92,7 +99,7 @@ html, body {
     margin: 0;
     height: 40px;
 }
-.contact-info {
+.contact {
 
 }
 .slider {

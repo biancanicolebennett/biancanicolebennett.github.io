@@ -9,7 +9,7 @@ var contactPage;
 export function initContact() {
     contactPage = new Page();
     contactPage.setContent(config.email);
-    contactPage.setClassName("contact-info");
+    contactPage.setClassName("contact");
     contactPage.mountTo(document.body);
 }
 
