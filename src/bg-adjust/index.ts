@@ -18,7 +18,7 @@ function setCookie() {
 
 function checkCookie() {
     let matches = document.cookie.match(reg_bg);
-    if (matches.length) {
+    if (matches && matches.length) {
         let val = parseInt(matches[0].substring(cookiename.length));
         if (isFinite(val)) {
             slider.value = val;
