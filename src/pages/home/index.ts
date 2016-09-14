@@ -1,5 +1,5 @@
 import "./styles.css";
-import Page from "../Page";
+import Page from "pages/Page";
 
 // root level config.js
 declare var config;

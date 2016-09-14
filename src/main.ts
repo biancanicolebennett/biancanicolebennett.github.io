@@ -1,15 +1,10 @@
-import "./styles.css";
 import { queueTask } from "./taskqueue";
+import { initPages } from "./pages";
 import { initNav } from "./nav";
-import { initHome } from "./home";
-import { initAbout } from "./about";
-import { initContact } from "./contact";
 import { initSlider } from "./bg-adjust";
 
 void function init() {
+    queueTask(initPages);
     queueTask(initNav);
-    queueTask(initHome);
-    queueTask(initAbout);
-    queueTask(initContact);
     queueTask(initSlider);
 }();

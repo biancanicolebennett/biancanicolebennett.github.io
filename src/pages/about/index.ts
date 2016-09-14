@@ -1,6 +1,6 @@
 import "./styles.css";
-import { queueTask } from "../taskqueue";
-import Page from "../Page";
+import { queueTask } from "taskqueue";
+import Page from "pages/Page";
 
 // root level config.js
 declare var config;

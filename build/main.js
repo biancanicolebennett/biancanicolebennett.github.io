@@ -204,7 +204,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(6);
+	__webpack_require__(8);
 	var taskqueue_1 = __webpack_require__(1);
 	var Page_1 = __webpack_require__(2);
 	var aboutPage;
@@ -255,7 +255,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(8);
+	__webpack_require__(9);
 	var Page_1 = __webpack_require__(2);
 	var contactPage;
 	function initContact() {
@@ -280,7 +280,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(9);
+	__webpack_require__(10);
 	var Page_1 = __webpack_require__(2);
 	var homePage;
 	function initHome() {
@@ -321,13 +321,30 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(7);
+	__webpack_require__(6);
 	var taskqueue_1 = __webpack_require__(1);
-	var val;
+	var cookiename = "bgval=";
+	var reg_bg = /bgval=.*\b/;
 	var bg;
 	var slider;
+	function setCookie() {
+	    var d = new Date();
+	    d.setTime(d.getTime() + 31536000000);
+	    document.cookie = document.cookie.replace(reg_bg, cookiename + slider.value + "; expires=" + d.toUTCString());
+	}
+	function checkCookie() {
+	    var matches = document.cookie.match(reg_bg);
+	    if (matches.length) {
+	        var val = parseInt(matches[0].substring(cookiename.length));
+	        if (isFinite(val)) {
+	            slider.value = val;
+	            bg.style.opacity = (slider.value / 100).toFixed(3);
+	        }
+	    }
+	}
 	function updateBackground() {
 	    bg.style.opacity = (slider.value / 100).toFixed(3);
+	    taskqueue_1.queueTask(setCookie);
 	}
 	function handleChange(event) {
 	    taskqueue_1.queueTask(updateBackground);
@@ -340,6 +357,7 @@
 	    slider.min = "0";
 	    slider.max = "100";
 	    slider.addEventListener("change", handleChange);
+	    taskqueue_1.queueTask(checkCookie);
 	    document.body.appendChild(slider);
 	}
 	exports.initSlider = initSlider;
@@ -350,18 +368,13 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(11);
 	var taskqueue_1 = __webpack_require__(1);
+	var pages_1 = __webpack_require__(15);
 	var nav_1 = __webpack_require__(14);
-	var home_1 = __webpack_require__(5);
-	var about_1 = __webpack_require__(3);
-	var contact_1 = __webpack_require__(4);
 	var bg_adjust_1 = __webpack_require__(12);
 	void function init() {
+	    taskqueue_1.queueTask(pages_1.initPages);
 	    taskqueue_1.queueTask(nav_1.initNav);
-	    taskqueue_1.queueTask(home_1.initHome);
-	    taskqueue_1.queueTask(about_1.initAbout);
-	    taskqueue_1.queueTask(contact_1.initContact);
 	    taskqueue_1.queueTask(bg_adjust_1.initSlider);
 	}();
 
@@ -371,7 +384,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	__webpack_require__(10);
+	__webpack_require__(7);
 	var taskqueue_1 = __webpack_require__(1);
 	var home_1 = __webpack_require__(5);
 	var about_1 = __webpack_require__(3);
@@ -437,6 +450,24 @@
 	    taskqueue_1.queueTask(initLinks);
 	}
 	exports.initNav = initNav;
+
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	__webpack_require__(11);
+	var taskqueue_1 = __webpack_require__(1);
+	var home_1 = __webpack_require__(5);
+	var about_1 = __webpack_require__(3);
+	var contact_1 = __webpack_require__(4);
+	function initPages() {
+	    taskqueue_1.queueTask(home_1.initHome);
+	    taskqueue_1.queueTask(about_1.initAbout);
+	    taskqueue_1.queueTask(contact_1.initContact);
+	}
+	exports.initPages = initPages;
 
 
 /***/ }

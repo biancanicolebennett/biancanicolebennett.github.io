@@ -1,4 +1,4 @@
-@import "../vars.css";
+@import "../../vars.css";
 
 .headline {
     font-weight: var(--headline-font-weight);

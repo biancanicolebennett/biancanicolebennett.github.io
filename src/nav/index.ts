@@ -1,8 +1,8 @@
 import "./styles.css";
-import { queueTask } from "../taskqueue";
-import { showHome, hideHome } from "../home";
-import { showAbout, hideAbout } from "../about";
-import { showContact, hideContact } from "../contact";
+import { queueTask } from "taskqueue";
+import { showHome, hideHome } from "pages/home";
+import { showAbout, hideAbout } from "pages/about";
+import { showContact, hideContact } from "pages/contact";
 
 // root level config.js
 declare var config;

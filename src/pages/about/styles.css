@@ -1,4 +1,4 @@
-@import "../vars.css";
+@import "../../vars.css";
 
 .about {
     font-size: var(--about-font-size);
