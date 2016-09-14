@@ -31,4 +31,5 @@ html, body {
     right: 0;
     width: var(--inner-block-width);
     max-width: 100%;
+    white-space: pre-wrap;
 }

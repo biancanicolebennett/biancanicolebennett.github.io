@@ -9,7 +9,7 @@ const c0 = config.pageTransition[0];
 const c1 = config.pageTransition[1];
 const c2 = config.pageTransition[2];
 const c3 = config.pageTransition[3] * -1;
-
+const duration = config.pageTransitionDuration;
 
 function cubicBezierStr( t: number, p0: number, p1: number, p2: number, p3: number) : string {
     let u = 1 - t;
@@ -26,12 +26,10 @@ function cubicBezierStr( t: number, p0: number, p1: number, p2: number, p3: numb
 
 export default function Page() {
     let self, el, wrap, contentEl,
-        p0, p1, p2, p3,
-        duration, startTime,
+        p0, p1, p2, p3, startTime,
         isMoving, isVisible;
 
     isVisible = false;
-    duration = 300;
 
     el = document.createElement("div");
     el.className = "page";

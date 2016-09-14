@@ -1,5 +1,9 @@
 @import "../vars.css";
 
+.about {
+    font-size: var(--about-font-size);
+}
+
 .list-wrap {
     margin-top: 40px;
     border-top: 1px solid white;
@@ -8,7 +12,9 @@
 
 .list {
     float: left;
-    min-width: var(--about-list-width);
+    min-width: var(--list-width);
+    font-size: var(--list-font-size);
+    line-height: var(--list-line-height);
 }
 
 .list-title {

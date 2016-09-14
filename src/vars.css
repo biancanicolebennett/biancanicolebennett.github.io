@@ -17,13 +17,17 @@
     --headline-font-weight: 700;
     --headline-font-size: 64px;
 
+    --about-font-size: 28px;
+
     --content-width: 1200px;
     --content-width-min: 400px;
 
-    --inner-block-top: 140px;
+    --inner-block-top: 200px;
     --inner-block-width: 800px;
 
-    --about-list-width: 240px;
+    --list-width: 250px;
+    --list-font-size: 15px;
+    --list-line-height: 1.65em;
 
     --nav-height: 80px;
 

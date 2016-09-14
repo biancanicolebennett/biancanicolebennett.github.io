@@ -17,12 +17,10 @@ function createList(title: string, items: string[]) {
     titleEl.textContent = title;
     listItems = document.createElement("div");
 
-    for (let i = 0; i < items.length; i += 4) {
-        itemGroup = document.createElement("div");
-        itemGroup.className = "list";
-        itemGroup.textContent = items.slice(i, i + 4).join("\n");
-        listItems.appendChild(itemGroup);
-    }
+    itemGroup = document.createElement("div");
+    itemGroup.className = "list";
+    itemGroup.textContent = items.join("\n");
+    listItems.appendChild(itemGroup);
 
     listEl.appendChild(titleEl);
     listEl.appendChild(listItems);
@@ -40,6 +38,7 @@ function initLists() {
 
 export function initAbout() {
     aboutPage = new Page();
+    aboutPage.setClassName("about");
     aboutPage.setContent(config.bio);
     aboutPage.mountTo(document.body);
     queueTask(initLists);
